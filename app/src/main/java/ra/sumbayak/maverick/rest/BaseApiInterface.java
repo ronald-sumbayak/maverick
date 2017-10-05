@@ -42,7 +42,7 @@ public abstract class BaseApiInterface<I> {
         };
     }
     
-    protected I build () {
+    public I build () {
         Retrofit.Builder builder = new Retrofit.Builder ()
             .baseUrl (baseUrl ())
             .addConverterFactory (GsonConverterFactory.create ());
