@@ -10,7 +10,7 @@ import okhttp3.*;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public abstract class BaseApiInterface {
+public abstract class BaseApiInterface<I> {
     
     protected String AUTH_HEADER_NAME = "Authorization";
     protected String TOKEN_SPKEY = "user_token";
@@ -25,6 +25,7 @@ public abstract class BaseApiInterface {
         init ();
     }
     
+    @NonNull protected abstract Class<I> interfaceClass ();
     @NonNull protected abstract String baseUrl ();
     @NonNull protected abstract String spName ();
     protected abstract void init ();
@@ -41,7 +42,7 @@ public abstract class BaseApiInterface {
         };
     }
     
-    protected Retrofit.Builder builder () {
+    protected I build () {
         Retrofit.Builder builder = new Retrofit.Builder ()
             .baseUrl (baseUrl ())
             .addConverterFactory (GsonConverterFactory.create ());
@@ -54,6 +55,6 @@ public abstract class BaseApiInterface {
                 .addInterceptor (tokenInterceptor (sp.getString (TOKEN_SPKEY, "Null")))
                 .build ());
         
-        return builder;
+        return builder.build ().create (interfaceClass ());
     }
 }
