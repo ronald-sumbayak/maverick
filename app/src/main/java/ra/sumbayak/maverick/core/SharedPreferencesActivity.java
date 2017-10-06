@@ -64,7 +64,7 @@ public class SharedPreferencesActivity extends AppCompatActivity {
             return putSP (getString (stringId), value);
         }
         
-        protected SPHelper putSP (@StringRes int stringId, boolean value) {
+        public SPHelper putSP (@StringRes int stringId, boolean value) {
             return putSP (getString (stringId), value);
         }
         
