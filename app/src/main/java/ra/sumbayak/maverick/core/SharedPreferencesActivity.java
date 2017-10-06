@@ -24,16 +24,16 @@ public class SharedPreferencesActivity extends AppCompatActivity {
             sp = getSharedPreferences (spname, MODE_PRIVATE);
         }
         
-        public boolean containsSP (@StringRes int stringId) {
-            return containsSP (getString (stringId));
+        public boolean contains (@StringRes int stringId) {
+            return contains (getString (stringId));
         }
         
-        public boolean containsSP (String key) {
+        public boolean contains (String key) {
             return sp.contains (key);
         }
         
         @SuppressLint ("CommitPrefEdits")
-        public SPHelper putSP (String key, String value) {
+        public SPHelper put (String key, String value) {
             if (spEditor == null)
                 spEditor = sp.edit ();
             spEditor.putString (key, value);
@@ -41,7 +41,7 @@ public class SharedPreferencesActivity extends AppCompatActivity {
         }
         
         @SuppressLint ("CommitPrefEdits")
-        public SPHelper putSP (String key, int value) {
+        public SPHelper put (String key, int value) {
             if (spEditor == null)
                 spEditor = sp.edit ();
             spEditor.putInt (key, value);
@@ -49,7 +49,7 @@ public class SharedPreferencesActivity extends AppCompatActivity {
         }
         
         @SuppressLint ("CommitPrefEdits")
-        public SPHelper putSP (String key, boolean value) {
+        public SPHelper put (String key, boolean value) {
             if (spEditor == null)
                 spEditor = sp.edit ();
             spEditor.putBoolean (key, value);
@@ -57,18 +57,18 @@ public class SharedPreferencesActivity extends AppCompatActivity {
         }
         
         public SPHelper putSP (@StringRes int stringId, String value) {
-            return putSP (getString (stringId), value);
+            return put (getString (stringId), value);
         }
         
         public SPHelper putSP (@StringRes int stringId, int value) {
-            return putSP (getString (stringId), value);
+            return put (getString (stringId), value);
         }
         
         public SPHelper putSP (@StringRes int stringId, boolean value) {
-            return putSP (getString (stringId), value);
+            return put (getString (stringId), value);
         }
         
-        public void applySP () {
+        public void apply () {
             spEditor.apply ();
             spEditor = null;
         }
