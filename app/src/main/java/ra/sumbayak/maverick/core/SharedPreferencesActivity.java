@@ -18,16 +18,40 @@ public class SharedPreferencesActivity extends AppCompatActivity {
         
         SPHelper () {
             int spnameId = getResources ().getIdentifier ("spname", "string", getPackageName ());
-            String spname = getString (spnameId);
+            String spname = getApplicationContext ().getString (spnameId);
             sp = getSharedPreferences (spname, MODE_PRIVATE);
+        }
+    
+        public boolean contains (String key) {
+            return sp.contains (key);
         }
         
         public boolean contains (@StringRes int stringId) {
-            return contains (getString (stringId));
+            return contains (getApplicationContext ().getString (stringId));
         }
         
-        public boolean contains (String key) {
-            return sp.contains (key);
+        public String getString (String key) {
+            return sp.getString (key, null);
+        }
+        
+        public String getString (@StringRes int stringId) {
+            return getString (getApplicationContext ().getString (stringId));
+        }
+        
+        public int getInt (String key) {
+            return sp.getInt (key, 0);
+        }
+        
+        public int getInt (@StringRes int stringId) {
+            return getInt (getApplicationContext ().getString (stringId));
+        }
+        
+        public boolean getBoolean (String key) {
+            return sp.getBoolean (key, false);
+        }
+        
+        public boolean getBoolean (@StringRes int stringId) {
+            return getBoolean (getApplicationContext ().getString (stringId));
         }
         
         @SuppressLint ("CommitPrefEdits")
@@ -37,13 +61,21 @@ public class SharedPreferencesActivity extends AppCompatActivity {
             spEditor.putString (key, value);
             return this;
         }
-        
+    
+        public SPHelper put (@StringRes int stringId, String value) {
+            return put (getApplicationContext ().getString (stringId), value);
+        }
+    
         @SuppressLint ("CommitPrefEdits")
         public SPHelper put (String key, int value) {
             if (spEditor == null)
                 spEditor = sp.edit ();
             spEditor.putInt (key, value);
             return this;
+        }
+    
+        public SPHelper put (@StringRes int stringId, int value) {
+            return put (getApplicationContext ().getString (stringId), value);
         }
         
         @SuppressLint ("CommitPrefEdits")
@@ -54,16 +86,8 @@ public class SharedPreferencesActivity extends AppCompatActivity {
             return this;
         }
         
-        public SPHelper put (@StringRes int stringId, String value) {
-            return put (getString (stringId), value);
-        }
-        
-        public SPHelper put (@StringRes int stringId, int value) {
-            return put (getString (stringId), value);
-        }
-        
         public SPHelper put (@StringRes int stringId, boolean value) {
-            return put (getString (stringId), value);
+            return put (getApplicationContext ().getString (stringId), value);
         }
         
         public void apply () {
