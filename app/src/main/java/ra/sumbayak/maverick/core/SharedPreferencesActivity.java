@@ -7,10 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 
 public class SharedPreferencesActivity extends AppCompatActivity {
     
-    private SPHelper sp;
-    
     public SPHelper getSPHelper () {
-        return sp;
+        return new SPHelper ();
     }
     
     protected class SPHelper {
