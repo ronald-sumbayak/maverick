@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class BaseApiInterface<I> {
     
     private String AUTH_HEADER_NAME = "Authorization";
-    private String TOKEN_SPKEY = "token";
+    private String TOKEN_SPKEY;
     private String TOKEN_PREFIX = "Token ";
     
     protected String DOMAIN = "http://192.168.43.245/";
@@ -22,6 +22,8 @@ public abstract class BaseApiInterface<I> {
     
     protected BaseApiInterface (Context context) {
         this.context = context;
+        int tokenId = context.getResources ().getIdentifier ("user_token", "string", context.getPackageName ());
+        TOKEN_SPKEY = context.getString (tokenId);
     }
     
     @NonNull protected abstract Class<I> interfaceClass ();
